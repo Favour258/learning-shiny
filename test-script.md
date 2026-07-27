@@ -8,32 +8,38 @@ output:
 ---
 
 
+``` r
+library(tidyverse)
+```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
+```
+## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.2.1     ✔ readr     2.2.0
+## ✔ forcats   1.0.1     ✔ stringr   1.6.0
+## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+## ✔ purrr     1.2.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
 
 ``` r
-summary(cars)
+dummy_data <- tibble(
+  treatment = rep(c("Control", "Nephelinite", "Melilitolite"), each = 3),
+  replicate = rep(1:3, times = 3),
+  pH = c(
+    4.7, 4.8, 4.9,
+    5.3, 5.4, 5.5,
+    6.0, 6.1, 6.2
+  )
+)
+
+ggplot(dummy_data, aes(x = treatment, y = pH)) +
+  geom_point(size = 3) +
+  theme_classic()
 ```
 
-```
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-```
+![](test-script_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
 
-## Including Plots
-
-You can also embed plots, for example:
-
-![](test-script_files/figure-html/pressure-1.png)<!-- -->
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
